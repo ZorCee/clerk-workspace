@@ -38,6 +38,7 @@ export default defineConfig({
     host: true,
     port: listenPort,
     strictPort: true,
+    allowedHosts: true,
     watch: {
       ignored: ['**/演示/**', '**/D:\\谛图文事台数据/**', '**/D:\\谛图文事台数据-演示/**'],
     },

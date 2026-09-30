@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite --host --port 5173",
-    "dev": "vite --host --port 5173",
+    "dev": "vite --host",
     "demo": "node scripts/start-demo.mjs",
     "demo:generate": "node scripts/generate-demo.mjs",
     "demo:record": "node scripts/record-demo.mjs",

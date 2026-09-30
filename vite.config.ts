@@ -30,11 +30,13 @@ function persistApi(): Plugin {
   }
 }
 
+const listenPort = Number(process.env.PORT) || 5173
+
 export default defineConfig({
   plugins: [react(), persistApi()],
   server: {
     host: true,
-    port: 5173,
+    port: listenPort,
     strictPort: true,
     watch: {
       ignored: ['**/演示/**', '**/D:\\谛图文事台数据/**', '**/D:\\谛图文事台数据-演示/**'],

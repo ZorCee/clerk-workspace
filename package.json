@@ -1,0 +1,35 @@
+{
+  "name": "wenshi-desk",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite --host --port 5173",
+    "dev": "vite --host --port 5173",
+    "demo": "node scripts/start-demo.mjs",
+    "demo:generate": "node scripts/generate-demo.mjs",
+    "demo:record": "node scripts/record-demo.mjs",
+    "demo:ppt": "node scripts/build-demo-ppt.mjs",
+    "share": "npx --yes localtunnel --port 5173",
+    "stop": "node scripts/stop.mjs",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview --host --port 4173"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "oxlint": "^1.75.0",
+    "playwright": "^1.62.1",
+    "pptxgenjs": "^4.0.1",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0"
+  }
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>文事台完整功能演示</title>
+  <style>
+    html, body { margin: 0; min-height: 100%; background: #021f40; color: #f7fbff; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; }
+    .wrap { min-height: 100vh; display: grid; place-items: center; padding: 28px 20px 40px; }
+    .stage { width: min(1600px, 96vw); }
+    h1 { margin: 0 0 8px; font-size: 22px; font-weight: 650; }
+    .hint { margin: 0 0 16px; color: #8fb4c8; font-size: 13px; }
+    .player { position: relative; background: #000; }
+    video { width: 100%; height: auto; display: block; background: #000; }
+    .sub {
+      position: absolute; left: 0; right: 0; bottom: 56px;
+      padding: 12px 28px 14px;
+      background: rgba(2, 31, 64, .9);
+      border-top: 3px solid #14c3cf;
+      pointer-events: none;
+    }
+    .sub .ttl { color: #14c3cf; font-size: 12px; letter-spacing: .16em; margin-bottom: 4px; }
+    .sub .txt { font-size: 20px; line-height: 1.5; font-weight: 650; }
+    .sub.empty { display: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="stage">
+      <h1>文事台完整功能演示</h1>
+      <p class="hint">湖南谛图科技 · 画面底部是讲解字幕，也可打开同目录的 srt / vtt。建议 Chrome / Edge 全屏播放。</p>
+      <div class="player">
+        <video id="v" controls autoplay>
+          <source src="./文事台完整功能演示.webm" type="video/webm" />
+          <track kind="subtitles" srclang="zh" label="讲解" src="./文事台完整功能演示.vtt" default />
+        </video>
+        <div class="sub empty" id="sub"><div class="ttl"></div><div class="txt"></div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const video = document.getElementById('v')
+    const box = document.getElementById('sub')
+    const ttl = box.querySelector('.ttl')
+    const txt = box.querySelector('.txt')
+    const cues = []
+
+    function parseStamp(raw) {
+      const [h, m, rest] = raw.trim().split(':')
+      const [s, ms] = rest.replace(',', '.').split('.')
+      return (+h) * 3600 + (+m) * 60 + (+s) + (+(ms || '0').padEnd(3, '0')) / 1000
+    }
+
+    fetch('./文事台完整功能演示.vtt').then((r) => r.text()).then((text) => {
+      const blocks = text.replace(/^WEBVTT\s*/, '').trim().split(/\n\n+/)
+      for (const block of blocks) {
+        const lines = block.split(/\n/).filter(Boolean)
+        const time = lines.find((l) => l.includes('-->'))
+        if (!time) continue
+        const [from, to] = time.split('-->')
+        const body = lines.filter((l) => l !== time)
+        cues.push({
+          start: parseStamp(from),
+          end: parseStamp(to),
+          title: body[0] || '',
+          text: body.slice(1).join(' ') || body[0] || '',
+        })
+      }
+    }).catch(() => {})
+
+    video.addEventListener('timeupdate', () => {
+      const t = video.currentTime
+      const hit = cues.find((c) => t >= c.start && t < c.end)
+      if (!hit) {
+        box.classList.add('empty')
+        return
+      }
+      box.classList.remove('empty')
+      ttl.textContent = hit.title
+      txt.textContent = hit.text
+    })
+  </script>
+</body>
+</html>

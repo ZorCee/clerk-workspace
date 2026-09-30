@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>文事台使用说明书 · 湖南谛图科技</title>
+  <style>
+    :root { color: #071a35; background: #f7f9fc; font: 15px/1.65 "PingFang SC", "Microsoft YaHei", sans-serif; }
+    body { margin: 0; }
+    .page { max-width: 820px; margin: 0 auto; padding: 36px 28px 72px; }
+    header { border-left: 6px solid #14c3cf; padding: 8px 0 8px 18px; margin-bottom: 28px; }
+    header p { margin: 0 0 6px; color: #14c3cf; letter-spacing: .16em; font-size: 12px; }
+    h1 { margin: 0; font-size: 30px; font-weight: 650; }
+    h2 { font-size: 20px; margin: 32px 0 12px; padding-top: 8px; border-top: 1px solid #d7e0ea; }
+    h3 { font-size: 16px; margin: 18px 0 8px; }
+    p, li { color: #071a35; }
+    .muted { color: #5a6b80; font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; }
+    th, td { border: 1px solid #d7e0ea; padding: 8px 10px; text-align: left; vertical-align: top; }
+    th { background: #eef6f8; }
+    code, pre { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+    pre { background: #eef6f8; padding: 12px 14px; }
+    .note { background: #fef3c7; border: 1px solid #f3d39a; padding: 10px 14px; color: #92400e; }
+    @media print {
+      body { background: #fff; }
+      .page { padding: 0; }
+      h2 { break-before: page; }
+      h2:first-of-type { break-before: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header>
+      <p>湖南谛图科技有限公司 · 内部文员工作台</p>
+      <h1>文事台使用说明书</h1>
+      <p class="muted">对照演示视频《文事台完整功能演示》编写。系统只起草、登记、提醒，不代替盖章外发。</p>
+    </header>
+
+    <h2>1. 这是什么</h2>
+    <p>文事台把飞书里的云盘文件夹和合同台账收到本机，给办公室文员日常使用。</p>
+    <table>
+      <tr><th>做</th><th>不做</th></tr>
+      <tr><td>登记合同、发票、应收应付</td><td>聊天、日程、审批</td></tr>
+      <tr><td>管本机资料库、检索、打开文件</td><td>在线多人同时改文档</td></tr>
+      <tr><td>起草报价单、套打合同书</td><td>盖章、对外发送</td></tr>
+      <tr><td>提醒待开票、未付、交接未完</td><td>代替人确认发出和归档</td></tr>
+    </table>
+    <p>台账和文件在 <strong>D:\谛图文事台数据</strong>，不放 C 盘。清浏览器也不会丢。每次保存前会留 <code>wenshi.bak.json</code>。</p>
+    <p class="muted">对应视频开场。</p>
+
+    <h2>2. 怎么开、怎么关</h2>
+    <p>第一次先在本软件目录执行一次 <code>npm install</code>。</p>
+    <table>
+      <tr><th>做什么</th><th>双击</th><th>地址</th></tr>
+      <tr><td>日常使用</td><td>启动网站.bat</td><td>http://localhost:5173/</td></tr>
+      <tr><td>给别人看演示（虚构数据）</td><td>启动演示.bat</td><td>http://localhost:5175/</td></tr>
+      <tr><td>给外地临时看</td><td>开启外地访问.bat</td><td>终端里的 loca.lt 链接</td></tr>
+      <tr><td>关闭</td><td>关闭网站.bat</td><td>或窗口里 Ctrl+C</td></tr>
+    </table>
+    <p>侧栏「打开D盘数据夹」打开数据目录；「打开附件夹」打开合同扫描件目录。</p>
+
+    <h2>3. 今日工作台</h2>
+    <p>文员每天从这里开工。四个数从台账算出，不用另做待办表。</p>
+    <table>
+      <tr><th>数字</th><th>含义</th></tr>
+      <tr><td>待办任务</td><td>还没处理完的开票、未开、交接</td></tr>
+      <tr><td>合同份数</td><td>单章 + 电子合同条数</td></tr>
+      <tr><td>合同未开</td><td>两张合同表「未开」列合计</td></tr>
+      <tr><td>合同未付</td><td>两张合同表「未付」列合计</td></tr>
+    </table>
+    <p><strong>我的任务</strong>从台账长出来：发票号码为空 / 待开 / 待定 → 待开发票；合同未开大于 0 → 合同未开；交接「文档完成情况」不是 √ → 交接未完。</p>
+    <p>点名称跳到台账。处理完点<strong>已完成</strong>（交接会打勾），或<strong>取消</strong>，之后还能放回待办。往下「合同按年」点数字进入该年采购或销售。</p>
+    <p class="muted">对应视频第 1 段。</p>
+
+    <h2>4. 单章合同、电子合同</h2>
+    <p>和飞书多维表一样：左侧按年、按采购/销售，格子里直接改，约半秒写入 D 盘。</p>
+    <h3>怎么看</h3>
+    <ol>
+      <li>侧栏「合同 → 单章合同统计」，或工作台点某年数字。</li>
+      <li>左侧选全部，或某年 → 采购 / 销售。</li>
+      <li>上方可搜名称、相对方、金额，例如「临港」。</li>
+      <li>点「电子合同」换表。两套分开统计、分开导入。</li>
+    </ol>
+    <h3>怎么改</h3>
+    <p>金额、已开未开、已付未付、状态、相对方都在格子里改。「已开 + 未开」「已付 + 未付」应等于合同金额。系统会按金额轧差，也可以手改未开、未付。</p>
+    <p>「合同」列填附件文件名，须与 <code>D:\谛图文事台数据\附件</code> 里的文件名一致才能打开扫描件。电子合同用「纸质版位置」记柜层。</p>
+    <p class="muted">对应视频第 2 段。</p>
+
+    <h2>5. 从飞书导入合同</h2>
+    <ol>
+      <li>飞书多维表导出 Excel，或复制表头加数据行。</li>
+      <li>打开「飞书合同导入」。单章和电子分开导，不要混在一张里。</li>
+      <li>拖入文件或粘贴识别，核年度、采购/销售后写入。重复行会跳过。</li>
+    </ol>
+    <p>资料库不管合同数字，只管文件。对应视频第 3 段。</p>
+
+    <h2>6. 资料库</h2>
+    <p>路径：<strong>D:\谛图文事台数据\资料库</strong>。目录对齐飞书：财务、公司基础、合同、申报、项目、招投标。</p>
+    <h3>搬文件</h3>
+    <ol>
+      <li>飞书下载文件或 zip。</li>
+      <li>拖进资料库，或「上传文件 / 上传文件夹 / 导入飞书压缩包」。</li>
+      <li>大文件夹请点「打开资料库文件夹」，用资源管理器复制。网页若提示 Failed to fetch，改用这个办法，或一次少选几个。</li>
+    </ol>
+    <h3>在线文档用链接</h3>
+    <p>飞书文档 / 表格 / 多维表格不是文件。打开后复制浏览器地址，在文件夹里「添加链接」。点名称用浏览器打开。招投标下那些在线表都按此办理。</p>
+    <p>还可搜索、建夹、重命名、删除、本机打开。「收入合同附件」会把附件夹复制一份到资料库「合同附件」。</p>
+    <p class="muted">对应视频第 4 段。</p>
+
+    <h2>7. 发票统计</h2>
+    <p>财务资料 → 发票统计。可从合同带出相对方和未开金额。没拿到票号就写「待开」或空着，会回到今日工作台。可导入 Excel、导出 CSV。</p>
+    <p class="muted">对应视频第 5 段前半。演示里常见待开：客户乙 8000、临港二期 27000。</p>
+
+    <h2>8. 应收应付</h2>
+    <p>财务资料 → 应收应付明细。应收账款是别人欠我们；应付是我们欠别人；预付如投标保证金。余额要和合同未开、未付对上。</p>
+    <p class="muted">对应视频第 5 段后半。</p>
+
+    <h2>9. 物品、存档、交接</h2>
+    <p>在「公司基础资料」下。</p>
+    <ul>
+      <li><strong>物品清单</strong>：位置 + 名称，如大厅货架几层放什么。</li>
+      <li><strong>纸质文件存档</strong>：柜层与资料，对应合同「纸质版位置」。</li>
+      <li><strong>工作交接清单</strong>：完成情况不是 √，今日待办会出现「交接未完」。交完点已完成或改成 √。</li>
+    </ul>
+    <p class="muted">对应视频第 6 段。</p>
+
+    <h2>10. 报价单</h2>
+    <ol>
+      <li>工作台点「开具报价单」。</li>
+      <li>左边填项目和物料，右边即时预览。含税合计跟数量、单价走。</li>
+      <li>复制正文或下载 Word，再写入台账。</li>
+    </ol>
+    <p>可以空着或写待定。Word 发出前仍由人确认。系统不外发。</p>
+    <p class="muted">对应视频第 7 段前半。</p>
+
+    <h2>11. 普通合同模板</h2>
+    <p>合同 → 普通合同模板。供方默认本公司，填需方、货物、数量后套打。写入进<strong>单章合同</strong>。电子签走电子合同表。系统不盖章、不自动发送。</p>
+    <p class="muted">对应视频第 7 段后半。</p>
+
+    <h2>12. 备份、演示与清空</h2>
+    <table>
+      <tr><th>按钮</th><th>作用</th></tr>
+      <tr><td>导出 / 导入备份</td><td>JSON 备份。导入会覆盖当前台账</td></tr>
+      <tr><td>重新装入演示数据</td><td>恢复虚构演示。真合同会被覆盖，导入飞书前慎用</td></tr>
+      <tr><td>清空数据</td><td>清空台账。资料库要用资料库页的「清空资料库」</td></tr>
+    </table>
+    <p>页顶黄条表示当前是演示台账。演示环境（5175）数据在 <code>D:\谛图文事台数据-演示</code>，不改正式目录。</p>
+
+    <h2>13. 日常建议</h2>
+    <ol>
+      <li>先看今日工作台待办。</li>
+      <li>新合同：导入或格子里加一行；扫描件放附件夹，文件名与「合同」列一致。</li>
+      <li>开票登记；没号写待开。</li>
+      <li>收付款后改已付/未付，核对应收应付。</li>
+      <li>找文件走资料库；飞书在线文档用链接。</li>
+      <li>报价、合同书：套打 → 下 Word → 人确认后再发。</li>
+      <li>交接改完成情况，待办会消失。</li>
+    </ol>
+
+    <h2>14. 常见问题</h2>
+    <p><strong>上传 Failed to fetch，是不是太大？</strong> 多半是浏览器掐断了。请用资源管理器复制进资料库，或打 zip，或一次少选几个。</p>
+    <p><strong>飞书文档上传是空的？</strong> 在线文档请「添加链接」。要留底再下载为 Word / Excel / PDF 后上传。</p>
+    <p><strong>改了格子刷新没了？</strong> 看清是 5173 正式还是 5175 演示。</p>
+    <p><strong>能不能代替飞书？</strong> 云盘和合同表可以逐步转过来。聊天、日程、审批、在线多人编辑，文事台不做。</p>
+
+    <h2>15. 数据目录</h2>
+    <pre>D:\谛图文事台数据\
+  wenshi.json        台账
+  wenshi.bak.json    上次写入前的备份
+  附件\              合同扫描件
+  资料库\            飞书迁入的文件夹</pre>
+
+    <p class="note">配套：同目录《文事台完整功能演示.webm》、播放演示视频.html、文事台演示.pptx。说明书章节与视频一致。</p>
+  </article>
+</body>
+</html>
